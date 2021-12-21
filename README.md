@@ -45,33 +45,33 @@ When jitter is turned on, it will add a slight bit of randomness to the eye rays
 
 Below are the images that the program generates for the sample scenes.
 
-<img src="scene1.png" width="200"> <img src="scene2.png" width="200"> <img src="scene3.png" width="200"> <img src="scene4.png" width="200"> <img src="scene5.png" width="200"> <img src="scene6.png" width="200"> <img src="scene7.png" width="200"> <img src="scene8.png" width="200"> <img src="scene9.png" width="200"> <img src="scene0.png" width="200"> <img src="scene-.png" width="200"> <img src="scene=.png" width="200">
+<img src="img/cscene1.png" width="200"> <img src="img/scene2.png" width="200"> <img src="img/scene3.png" width="200"> <img src="img/scene4.png" width="200"> <img src="img/scene5.png" width="200"> <img src="img/scene6.png" width="200"> <img src="img/scene7.png" width="200"> <img src="img/scene8.png" width="200"> <img src="img/scene9.png" width="200"> <img src="img/scene0.png" width="200"> <img src="img/scene-.png" width="200"> <img src="img/scene=.png" width="200">
 
 Here are the images with sample level 4 and jittering on. The silhouettes of objects blend together more cleanly instead of showing stair-steps, the shadows is smoother, and the specular highlights is filled in. 
 
-<img src="scene1-rj.png" width="200"> <img src="scene2-rj.png" width="200"> <img src="scene3-rj.png" width="200"> <img src="scene4-rj.png" width="200"> <img src="scene5-rj.png" width="200"> <img src="scene6-rj.png" width="200"> <img src="scene7-rj.png" width="200"> <img src="scene8-rj.png" width="200"> <img src="scene9-rj.png" width="200"> <img src="scene0-rj.png" width="200"> <img src="scene--rj.png" width="200"> <img src="scene=-rj.png" width="200">
+<img src="img/scene1-rj.png" width="200"> <img src="img/scene2-rj.png" width="200"> <img src="img/scene3-rj.png" width="200"> <img src="img/scene4-rj.png" width="200"> <img src="img/scene5-rj.png" width="200"> <img src="img/scene6-rj.png" width="200"> <img src="img/scene7-rj.png" width="200"> <img src="img/scene8-rj.png" width="200"> <img src="img/scene9-rj.png" width="200"> <img src="img/scene0-rj.png" width="200"> <img src="img/scene--rj.png" width="200"> <img src="img/scene=-rj.png" width="200">
 
 If we zoom in on the final scene, we can see the antialiasing on the sphere edges, the area shadows (combined with the sharp point shadow) and the highlights from the area and point light.
 
-<img src="scene=-rj-zoom.png" width="400">
+<img src="img/scene=-rj-zoom.png" width="400">
 
 Here is this final image, with various levels of antialiasing and non-jittered distributions:
 
-<img src="three-spheres.png" width="200"> <img src="three-spheres-w.png" width="200"> <img src="three-spheres-e.png" width="200"> <img src="three-spheres-r.png" width="200"> <img src="three-spheres-u.png" width="200">
+<img src="img/three-spheres.png" width="200"> <img src="img/three-spheres-w.png" width="200"> <img src="img/three-spheres-e.png" width="200"> <img src="img/three-spheres-r.png" width="200"> <img src="img/three-spheres-u.png" width="200">
 
 Here is this same final image, with jittered distributions:
 
-<img src="three-spheres-j.png" width="200"> <img src="three-spheres-wj.png" width="200"> <img src="three-spheres-ej.png" width="200"> <img src="three-spheres-rj.png" width="200"> <img src="three-spheres-uj.png" width="200">
+<img src="img/three-spheres-j.png" width="200"> <img src="img/three-spheres-wj.png" width="200"> <img src="img/three-spheres-ej.png" width="200"> <img src="img/three-spheres-rj.png" width="200"> <img src="img/three-spheres-uj.png" width="200">
 
 Especially without only 1 ray, or with a small number of rays, you can see very dramatic differences between the two, with the results getting better as the number of rays increases.
 
 Here is this images from above with reflection, stating with no distribution and continuing with jittered distributions above:
 
-<img src="three-spheres-g.png" width="200"> <img src="three-spheres-jg.png" width="200"> <img src="three-spheres-wjg.png" width="200"> <img src="three-spheres-ejg.png" width="200"> <img src="three-spheres-rjg.png" width="200"> <img src="three-spheres-ujg.png" width="200"> 
+<img src="img/three-spheres-g.png" width="200"> <img src="img/three-spheres-jg.png" width="200"> <img src="img/three-spheres-wjg.png" width="200"> <img src="img/three-spheres-ejg.png" width="200"> <img src="img/three-spheres-rjg.png" width="200"> <img src="img/three-spheres-ujg.png" width="200"> 
 
 Finally, here is a high quality (Sample Level = 10, Jitter on, Reflection on) run at full resolution:
 
-<img src="3-sphere-refl.png" width="400">
+<img src="img/3-sphere-refl.png" width="400">
 
 ## Scene Description Language
 
