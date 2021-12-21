@@ -2,13 +2,29 @@
 
 A simple ray tracing renderer program using three.js that renders spheres and disks illuminated by a light source. Supports area lights, distribution ray tracing, soft shadows, anti-aliasing, and reflection.
 
-This project was for CS 3451 Computer Graphics course taught by Professor Blair MacIntyre at Georgia Tech.
+This project was for CS 3451 Computer Graphics course taught by Professor Blair MacIntyre at Georgia Tech. The setup of the project and all the test cases were provided by the professor. I implemented the functions that is listed in the Scene Description Language section.
 
 ## Try the ray tracer on your machine!
 
 1. cd into the directory and run ```npm install```
 2. run with ```npm run dev```
 3. visit ```http://localhost:3000/```
+
+### Scene Selection
+
+Select the scene you want to render. The last scene (Three Spheres with Disk and Area Light) is a great way to test all the features for this ray tracer.
+
+### Sample Level
+
+Amount of rays shot per-pixel for anti-aliasing and soft shadows. For level = 1, the default, just a single ray will be shot per-pixel, and all shadows will be hard shadows. For integer values of level greater than one, you will shoot multiple rays per pixel, and these rays will be spaced evenly through different sub-pixels in the pixel in a square grid pattern. When level = 2, you will shoot 2 x 2 = 4 rays, and so on.
+
+### Reflection
+
+Enable reflection of surfaces. This feature will work best with the last scene.
+
+### Jitter
+
+When jitter is turned on, it will add a slight bit of randomness to the eye rays and the positions of sample on the rectangle for area light sources. The result will be that the antialiasing and soft shadows will be more smooth than what you get without jitter.
 
 ## Project Goals
 
@@ -25,15 +41,11 @@ This project was for CS 3451 Computer Graphics course taught by Professor Blair 
 
 ## Results
 
-NOTE: all of the images here are generated with the parameters `super(div, 500, 600, 250, 300)` in the constructor, except the final high quality renders at the bottom.
-
-Below are the images that your program should generate for the sample scenes, when you press the keys "1234567890-=". No scene is generated when the program starts, you will just see a light yellow canvas. 
+Below are the images that the program generates for the sample scenes.
 
 <img src="scene1.png" width="200"> <img src="scene2.png" width="200"> <img src="scene3.png" width="200"> <img src="scene4.png" width="200"> <img src="scene5.png" width="200"> <img src="scene6.png" width="200"> <img src="scene7.png" width="200"> <img src="scene8.png" width="200"> <img src="scene9.png" width="200"> <img src="scene0.png" width="200"> <img src="scene-.png" width="200"> <img src="scene=.png" width="200">
 
-(Note: these and other images, are store in full resolution in the project, if you would like to examine them closer.)
-
-Each of these scenes will be slightly improved if you turn on supersampling before rendering them, which performs anti-aliasing, soft shadows, and area light specular highlights.  Because you will shoot and average together multiple slightly different rays per pixel, the silhouettes of objects will blend together more cleanly instead of showing stair-steps, the shadows will be smoother, and the specular highlights will fill in. To get these anti-aliased images, you should type the character "r" before rendering the given scene, which sets the sample level to 4, and type the character "j" to turn on jittering.
+Here are the images with sample level 4 and jittering on. The silhouettes of objects blend together more cleanly instead of showing stair-steps, the shadows is smoother, and the specular highlights is filled in. 
 
 <img src="scene1-rj.png" width="200"> <img src="scene2-rj.png" width="200"> <img src="scene3-rj.png" width="200"> <img src="scene4-rj.png" width="200"> <img src="scene5-rj.png" width="200"> <img src="scene6-rj.png" width="200"> <img src="scene7-rj.png" width="200"> <img src="scene8-rj.png" width="200"> <img src="scene9-rj.png" width="200"> <img src="scene0-rj.png" width="200"> <img src="scene--rj.png" width="200"> <img src="scene=-rj.png" width="200">
 
@@ -41,7 +53,7 @@ If we zoom in on the final scene, we can see the antialiasing on the sphere edge
 
 <img src="scene=-rj-zoom.png" width="400">
 
-Here is this final image, with various levels of antialiasing (qweru) and non-jittered distributions:
+Here is this final image, with various levels of antialiasing and non-jittered distributions:
 
 <img src="three-spheres.png" width="200"> <img src="three-spheres-w.png" width="200"> <img src="three-spheres-e.png" width="200"> <img src="three-spheres-r.png" width="200"> <img src="three-spheres-u.png" width="200">
 
@@ -51,11 +63,11 @@ Here is this same final image, with jittered distributions:
 
 Especially without only 1 ray, or with a small number of rays, you can see very dramatic differences between the two, with the results getting better as the number of rays increases.
 
-Here is this images from above with reflection, stating with no distribution and continuing with jittered distributions above) (these would be generated with "g=", "jg=", "wjg=", "ejg=", "rjg=" and "ujg="):
+Here is this images from above with reflection, stating with no distribution and continuing with jittered distributions above:
 
 <img src="three-spheres-g.png" width="200"> <img src="three-spheres-jg.png" width="200"> <img src="three-spheres-wjg.png" width="200"> <img src="three-spheres-ejg.png" width="200"> <img src="three-spheres-rjg.png" width="200"> <img src="three-spheres-ujg.png" width="200"> 
 
-Finally, here is a high quality "pjg=" run at full resolution:
+Finally, here is a high quality (Sample Level = 10, Jitter on, Reflection on) run at full resolution:
 
 <img src="3-sphere-refl.png" width="400">
 
