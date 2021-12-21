@@ -1,60 +1,93 @@
-# Assignment 3b:  Disks, Area Lights, and Distribution Ray Tracing
+# Ray Tracer 
 
-In this project you will expand the ray tracer that you wrote for Project 3A. The new features that you will add are distribution ray tracing, and adding disk objects and area light sources to the scene description. Adding disks will allow you to create scenes that have more geometric richness, including flat planes upon which other objects may rest. Area light sources will allow the creation of soft shadows when distribution ray tracing is enabled. In addition to these new scene features, you will add shadows to your illumination equation. 
+A simple ray tracing renderer program using three.js that renders spheres and disks illuminated by a light source. Supports area lights, distribution ray tracing, soft shadows, anti-aliasing, and reflection.
 
-Distribution ray tracing will enable:
-- Soft shadows for area light sources. You will cast more than one ray per pixel, and each shadow ray will be aimed at different places on the area light source. 
-- Anti-aliasing of the scene. Casting multiple rays per eye ray (image pixel) will anti-alias the scene, reducing noticeable stair-steps at the edges of objects.  
+This project was for CS 3451 Computer Graphics course taught by Professor Blair MacIntyre at Georgia Tech.
 
-There will also be opportunities to get extra credit on this assignment by implementing additional features (see below).
+## Project Goals
 
-## Due: Tuesday November 9th, 11:59pm
+1. Initialize the scene
+2. Cast eye rays for each pixel
+3. Implement detection of ray intersection with spheres
+4. Implement the shading equation
+5. Create disk objects, including a ray/disk intersection routine 
+6. Create area light sources
+7. Enable shadow creation by light sources
+8. Shoot multiple rays per pixel (super-sampling), and use these for anti-aliasing. 
+9. Create multiple light rays per surface point being shaded, and use these for soft shadows as well as a specular highlights
+10. Implement reflection using recursion
 
-## Rubric
+# Results
 
-1. (2 points) Correct ray/disk intersection
-2. (1 point) Area light source behaves similarly to point light with no distribution 
-3. (2 points) Shadows with hard edges created with no distribution 
-4. (2 points) Distribution of eye rays created correctly for regular grid when no jitter requested
-5. (1 point) Jittered distribution created correctly (randomly distributed within pixels)
-6. (1 point) Area lights appear in highlights correctly with distribution
-7. (1 point) Area lights cast soft shadows correctly with distribution
+NOTE: all of the images here are generated with the parameters `super(div, 500, 600, 250, 300)` in the constructor, except the final high quality renders at the bottom.
 
-Bonus points for optional parts
-1. (2 point) Reflection implemented correctly
-2. (2 point) Either motion blur or depth of field implemented correctly
+Below are the images that your program should generate for the sample scenes, when you press the keys "1234567890-=". No scene is generated when the program starts, you will just see a light yellow canvas. 
 
-## Project Description
+<img src="scene1.png" width="200"> <img src="scene2.png" width="200"> <img src="scene3.png" width="200"> <img src="scene4.png" width="200"> <img src="scene5.png" width="200"> <img src="scene6.png" width="200"> <img src="scene7.png" width="200"> <img src="scene8.png" width="200"> <img src="scene9.png" width="200"> <img src="scene0.png" width="200"> <img src="scene-.png" width="200"> <img src="scene=.png" width="200">
 
-You have five primary goals for the first part of this project:
+(Note: these and other images, are store in full resolution in the project, if you would like to examine them closer.)
 
-1. Create disk objects, including a ray/disk intersection routine 
-2. Create area light sources
-3. Enable shadow creation by light sources
-4. Shoot multiple rays per pixel (super-sampling), and use these for anti-aliasing. 
-5. Create multiple light rays per surface point being shaded, and use these for soft shadows as well as a specular highlights 
+Each of these scenes will be slightly improved if you turn on supersampling before rendering them, which performs anti-aliasing, soft shadows, and area light specular highlights.  Because you will shoot and average together multiple slightly different rays per pixel, the silhouettes of objects will blend together more cleanly instead of showing stair-steps, the shadows will be smoother, and the specular highlights will fill in. To get these anti-aliased images, you should type the character "r" before rendering the given scene, which sets the sample level to 4, and type the character "j" to turn on jittering.
 
-# Provided Code
+<img src="scene1-rj.png" width="200"> <img src="scene2-rj.png" width="200"> <img src="scene3-rj.png" width="200"> <img src="scene4-rj.png" width="200"> <img src="scene5-rj.png" width="200"> <img src="scene6-rj.png" width="200"> <img src="scene7-rj.png" width="200"> <img src="scene8-rj.png" width="200"> <img src="scene9-rj.png" width="200"> <img src="scene0-rj.png" width="200"> <img src="scene--rj.png" width="200"> <img src="scene=-rj.png" width="200">
 
-The provided source code in `testRayTracer.ts` is similar to the same file in 3A, creating various scenes using the functions you will write. Each number key 1-0 plus - and = is assigned to a single scene function and pressing that key should reset the scene and create an image of the new one. The scenes are different than 3A. There are additional keys that adjust how many pixels are created (keys: q,w,e,r,t,y,u,i,o,p), and whether or not jittered sampling is enabled for soft shadows (keys: j,n).   If you choose to do any of the option parts of the assignment for extra credit, there are keys to turn on or off reflections (keys: g,v), motion blur (keys: k,m), and depth of field (keys: d,x).
+If we zoom in on the final scene, we can see the antialiasing on the sphere edges, the area shadows (combined with the sharp point shadow) and the highlights from the area and point light.
 
-As with 3A, the code in `rayTracer.ts` contains some code to get your started, along with empty functions used for scene setup.  There are new functions for area lights and disks (`new_disk()` and `area_light()`) that you will need to implement, and some new optional parameters on `new_sphere()` and `draw_scene()` that you will use with some of the option parts of the assignment. These are described below. As with 3A, feel free to define any classes, objects, data structures, and global variables that you want to accomplish this project.
+<img src="scene=-rj-zoom.png" width="400">
 
-We have included some additional hints and suggested methods in the code, which are marked appropriately.
+Here is this final image, with various levels of antialiasing (qweru) and non-jittered distributions:
 
-You should modify the source code in any way you see fit, and comment your code (include placing your name in the header). The source code is written in Typescript. You are NOT allowed to use any graphics commands from libraries such as Three.js or native web libraries, all code must be your own. We are not using rasterization for this project, so you should not need any of these libraries.
+<img src="three-spheres.png" width="200"> <img src="three-spheres-w.png" width="200"> <img src="three-spheres-e.png" width="200"> <img src="three-spheres-r.png" width="200"> <img src="three-spheres-u.png" width="200">
+
+Here is this same final image, with jittered distributions:
+
+<img src="three-spheres-j.png" width="200"> <img src="three-spheres-wj.png" width="200"> <img src="three-spheres-ej.png" width="200"> <img src="three-spheres-rj.png" width="200"> <img src="three-spheres-uj.png" width="200">
+
+Especially without only 1 ray, or with a small number of rays, you can see very dramatic differences between the two, with the results getting better as the number of rays increases.
+
+Here is this images from above with reflection, stating with no distribution and continuing with jittered distributions above) (these would be generated with "g=", "jg=", "wjg=", "ejg=", "rjg=" and "ujg="):
+
+<img src="three-spheres-g.png" width="200"> <img src="three-spheres-jg.png" width="200"> <img src="three-spheres-wjg.png" width="200"> <img src="three-spheres-ejg.png" width="200"> <img src="three-spheres-rjg.png" width="200"> <img src="three-spheres-ujg.png" width="200"> 
+
+Finally, here is a high quality "pjg=" run at full resolution:
+
+<img src="3-sphere-refl.png" width="400">
 
 # Scene Description Language
 
-Each scene is described by calling several functions that set up and render the scene.  In addition to the test scenes, we have also provided empty functions for you to write in order to create and expand your ray tracer.  The empty functions from part A remain in the file, so you should incorporate your code from Part A in your program for Part B. Feel free to define any objects, data structures, and global variables that you want to accomplish this project.
+Below are the function descriptions I had to implement for this project. The descriptions are written by Professor Blair MacIntyre.
 
-Below are the new functions that you will need to implement for this assignment:
+#### `reset_scene ()`
 
-#### `new_disk  (x, y, z, radius, nx, ny, nz, dr, dg, db, k_ambient, k_specular, specular_power, vx?: number, vy?: number, vz?: number)
+Initialize all the data structures and variables so you can start with an empty scene.
+
+#### `set_background (r, g, b)`
+
+Sets the background color. If a ray misses all the objects in the scene, the pixel should be given this color.
+
+#### `set_fov (angle)`
+
+Specifies the field of view (in degrees) for perspective projection.  You will need to convert this to the focal length d.  You will then use this together with the eye position and the u, v, and w vectors of the eye's rotation matrix to create the eye rays.
+
+#### `set_eye (cx, cy, cz, lx, ly, lz,  ux, uy, uz)`
+
+Specifies the eye position (cx,cy,cz) in 3D coordinates along with a lookat point (lx,ly,lz) that define the position and direction the camera is looking. An up vector (ux, uy, uz) allows you to set the full orientation of the camera.
+
+#### `new_light (r, g, b, x, y, z)`
+
+Create a point light source at position (x,y,z) and its color (r, g, b). Your code should allow at least 10 light sources. For the second part of this assignment, you will cause these lights to cast shadows.
+
+#### `ambient_light (r, g, b)`
+
+Create an "ambient" light with color (r, g, b), in order to approximate indirect illumination. There is only one ambient light; multiple calls will just replace the ambient light.
+
+#### `new_sphere  (x, y, z, radius, dr, dg, db, k_ambient, k_specular, specular_power)`
+
+Specifies the creation of a sphere with its center at (x, y, z) and with a given radius.  The diffuse color of the sphere is given by (dr, dg, db).  The coefficient k_ambient specifies how much of the ambient light combines with the diffuse color of the surface.  For this project, we will assume that all specular highlights are white, and the brightness of the highlight is given by k_specular. The tightness of the highlight is guided by specular_power.
+
+#### `new_disk  (x, y, z, radius, nx, ny, nz, dr, dg, db, k_ambient, k_specular, specular_power, vx?: number, vy?: number, vz?: number)`
 
 Specifies the creation of a disk with its center at `c = (x, y, z)`, with a given `radius`, and with a surface normal `n = (nx, ny, nz)`.  The diffuse color of the sphere is given by `dr, dg, db`.  The coefficient `k_ambient` specifies how much of the ambient light combines with the diffuse color of the surface.  For this project, we will assume that all specular highlights are white, and the brightness of the highlight is given by `k_specular`. The tightness of the highlight is guided by `specular_power`. 
-
-The optional parameters `vx, vy, vz` are only needed for optional motion blur part of the assignment. They represent the velocity of the object. The object is moving from `x,y,z - vx,vy,vz` to `x,y,z + vx,vy,vz` during the time interval being rendered.
 
 #### `area_light (r, g, b, x, y, z, ux, uy, uz, vx, vy, vz)`
 
@@ -91,25 +124,9 @@ When jitter is turned on, you will add a slight bit of randomness to the eye ray
 
 An optional extra credit part of the assignment is to implement reflected rays (see below).  Pressing the "g" key turns on reflected rays, and "v" turns off reflected rays.  Default is off.
 
-#### `blur_on()` and `blur_off()`
+#### `draw_scene()`
 
-An optional extra credit part of the assignment is to implement motion blur (see below).  Pressing the "k" key turns on motion blur, and "m" turns off motion blur.  Default is off.
-
-#### `depth_on()` and `depth_off()`
-
-An optional extra credit part of the assignment is to implement depth of field (see below).  Pressing the "d" key turns on depth of field, and "x" turns off depth of field.  Default is off.
-
-## Commands Modified from Part A
-
-Below are the methods that you implemented in part A this assignment that have changed:
-
-#### `new_sphere  (x, y, z, radius, dr, dg, db, k_ambient, k_specular, specular_power, vx?: number, vy?: number, vz?: number)`
-
-The optional parameters vx, vy, vz are only needed for optional motion blur part of the assignment. They represent the velocity of the object. The object is moving from `x,y,z - vx,vy,vz` to `x,y,z + vx,vy,vz` during the time interval being rendered.
-
-#### `draw_scene(lensSize?: number, depth1?: number, depth2?: number)`
-
-The three new optional parameters are used for the depth of field extra credit part. You will use these to modify this routine to adjust the eye rays to create the depth of field effect eyeRays.  `lensSize` represents the size of the lens (the area that the origin of the eyeRays should be spread over). `depth1` represents the distance along the eye ray that the lens sits at. `depth2` is the distance along the eye ray that is the focal plane.  
+Ray-traces the scene and displays the image in the canvas region in your browser.  We have provided this method, but you will need to implement two internal methods, `traceRay(ray)` and `eyeRay(i,j)`, that this method calls.  
 
 # Results for Main assignment
 
