@@ -45,7 +45,7 @@ When jitter is turned on, it will add a slight bit of randomness to the eye rays
 
 Below are the images that the program generates for the sample scenes.
 
-<img src="img/cscene1.png" width="200"> <img src="img/scene2.png" width="200"> <img src="img/scene3.png" width="200"> <img src="img/scene4.png" width="200"> <img src="img/scene5.png" width="200"> <img src="img/scene6.png" width="200"> <img src="img/scene7.png" width="200"> <img src="img/scene8.png" width="200"> <img src="img/scene9.png" width="200"> <img src="img/scene0.png" width="200"> <img src="img/scene-.png" width="200"> <img src="img/scene=.png" width="200">
+<img src="img/scene1.png" width="200"> <img src="img/scene2.png" width="200"> <img src="img/scene3.png" width="200"> <img src="img/scene4.png" width="200"> <img src="img/scene5.png" width="200"> <img src="img/scene6.png" width="200"> <img src="img/scene7.png" width="200"> <img src="img/scene8.png" width="200"> <img src="img/scene9.png" width="200"> <img src="img/scene0.png" width="200"> <img src="img/scene-.png" width="200"> <img src="img/scene=.png" width="200">
 
 Here are the images with sample level 4 and jittering on. The silhouettes of objects blend together more cleanly instead of showing stair-steps, the shadows is smoother, and the specular highlights is filled in. 
 
