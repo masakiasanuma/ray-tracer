@@ -4,7 +4,7 @@ A simple ray tracing renderer program using three.js that renders spheres and di
 
 This project was for CS 3451 Computer Graphics course taught by Professor Blair MacIntyre at Georgia Tech.
 
-# Try the ray tracer on your machine!
+## Try the ray tracer on your machine!
 
 1. cd into the directory and run ```npm install```
 2. run with ```npm run dev```
@@ -23,7 +23,7 @@ This project was for CS 3451 Computer Graphics course taught by Professor Blair 
 9. Create multiple light rays per surface point being shaded, and use these for soft shadows as well as a specular highlights
 10. Implement reflection using recursion
 
-# Results
+## Results
 
 NOTE: all of the images here are generated with the parameters `super(div, 500, 600, 250, 300)` in the constructor, except the final high quality renders at the bottom.
 
@@ -59,7 +59,7 @@ Finally, here is a high quality "pjg=" run at full resolution:
 
 <img src="3-sphere-refl.png" width="400">
 
-# Scene Description Language
+## Scene Description Language
 
 Below are the function descriptions I had to implement for this project. The descriptions are written by Professor Blair MacIntyre.
 
@@ -132,95 +132,4 @@ An optional extra credit part of the assignment is to implement reflected rays (
 
 #### `draw_scene()`
 
-Ray-traces the scene and displays the image in the canvas region in your browser.  We have provided this method, but you will need to implement two internal methods, `traceRay(ray)` and `eyeRay(i,j)`, that this method calls.  
-
-# Results for Main assignment
-
-NOTE: all of the images here are generated with the parameters `super(div, 500, 600, 250, 300)` in the constructor, except the final high quality renders at the bottom.
-
-Below are the images that your program should generate for the sample scenes, when you press the keys "1234567890-=". No scene is generated when the program starts, you will just see a light yellow canvas. 
-
-<img src="scene1.png" width="200"> <img src="scene2.png" width="200"> <img src="scene3.png" width="200"> <img src="scene4.png" width="200"> <img src="scene5.png" width="200"> <img src="scene6.png" width="200"> <img src="scene7.png" width="200"> <img src="scene8.png" width="200"> <img src="scene9.png" width="200"> <img src="scene0.png" width="200"> <img src="scene-.png" width="200"> <img src="scene=.png" width="200">
-
-(Note: these and other images, are store in full resolution in the project, if you would like to examine them closer.)
-
-Each of these scenes will be slightly improved if you turn on supersampling before rendering them, which performs anti-aliasing, soft shadows, and area light specular highlights.  Because you will shoot and average together multiple slightly different rays per pixel, the silhouettes of objects will blend together more cleanly instead of showing stair-steps, the shadows will be smoother, and the specular highlights will fill in. To get these anti-aliased images, you should type the character "r" before rendering the given scene, which sets the sample level to 4, and type the character "j" to turn on jittering.
-
-<img src="scene1-rj.png" width="200"> <img src="scene2-rj.png" width="200"> <img src="scene3-rj.png" width="200"> <img src="scene4-rj.png" width="200"> <img src="scene5-rj.png" width="200"> <img src="scene6-rj.png" width="200"> <img src="scene7-rj.png" width="200"> <img src="scene8-rj.png" width="200"> <img src="scene9-rj.png" width="200"> <img src="scene0-rj.png" width="200"> <img src="scene--rj.png" width="200"> <img src="scene=-rj.png" width="200">
-
-If we zoom in on the final scene, we can see the antialiasing on the sphere edges, the area shadows (combined with the sharp point shadow) and the highlights from the area and point light.
-
-<img src="scene=-rj-zoom.png" width="400">
-
-Here is this final image, with various levels of antialiasing (qweru) and non-jittered distributions:
-
-<img src="three-spheres.png" width="200"> <img src="three-spheres-w.png" width="200"> <img src="three-spheres-e.png" width="200"> <img src="three-spheres-r.png" width="200"> <img src="three-spheres-u.png" width="200">
-
-Here is this same final image, with jittered distributions:
-
-<img src="three-spheres-j.png" width="200"> <img src="three-spheres-wj.png" width="200"> <img src="three-spheres-ej.png" width="200"> <img src="three-spheres-rj.png" width="200"> <img src="three-spheres-uj.png" width="200">
-
-Especially without only 1 ray, or with a small number of rays, you can see very dramatic differences between the two, with the results getting better as the number of rays increases.
-
-# Submission
-
-In addition to your code, you should generate an image using the command "pk=" at a full resolution of 500x600.  Name this file "submission-<your-gt-email-id>.png" and include it in the top level folder.
-
-# Optional Components
-
-In this assignment you have the option of implementing two additional features for extra credit.
-
-## Extra credit 1:  Reflection (2 point)
-
-For this extra credit, you will implement reflection rays. For each ray that strikes a triangle, if the maximum reflection depth (initially set as 5 on the line `maxDepth = 5;`) has been reached, you should not add any more reflections. Otherwise, you should generate a new reflection ray (by reflecting the current ray around the surface normal) and cast it into the scene. The color contribution of that ray should be adjusted using the `k_specular` surface property and added to the color of the pixel.
-
-You should only generate one reflected ray per incoming ray, even if there are distributed rays being computed.
-
-Here is this images from above, stating with no distribution and continuing with jittered distributions above) (these would be generated with "g=", "jg=", "wjg=", "ejg=", "rjg=" and "ujg="):
-
-<img src="three-spheres-g.png" width="200"> <img src="three-spheres-jg.png" width="200"> <img src="three-spheres-wjg.png" width="200"> <img src="three-spheres-ejg.png" width="200"> <img src="three-spheres-rjg.png" width="200"> <img src="three-spheres-ujg.png" width="200"> 
-
-Finally, here is a high quality "pjg=" run at full resolution:
-
-<img src="3-sphere-refl.png" width="400">
-
-#### Submission
-
-Inform your TA that you did this extra credit.  In addition to your code, you should generate an image using the command "pjg=" at a full resolution of 500x600.  Name this file "submission-reflection-<your-gt-email-id>.png" and include it in the top level folder.
-
-## Extra credit 2: Motion Blur or Depth of Field (2 points)
-
-You may earn a second extra credit point, only after you do the first extra credit, by implementing either motion blur or depth of field effects.
-
-### Motion Blur
-
-Motion blur is implemented on moving objects by observing that a single image captures a scene over a period of time.  During that time, the moving objects in the scene are captured at all locations they are in during that time period, with the results averaged together.  To using distribution ray tracing, we select a different location for each moving object for each ray shot. 
-
-We have provided optional velocity values for the sphere and disk.  This velocity represents a +/- value around the objects location during the frame time, with the object being anywhere from  `x,y,z - vx,vy,vz` to `x,y,z + vx,vy,vz` during the time interval.  For each ray, you should chose one position for the object randomly, and render the scene using that time.  When many rays are shot per eye ray, using a different time for each ray will result in an average pixel color over many possible object locations.  A sample image on the final scene is this, captured by typing "pjgk="
-
-<img src="motion-blur.png" width="400">
-
-#### Submission
-
-Inform your TA that you did this extra credit.  In addition to your code, you should generate an image using the command "pjgk=" at a full resolution of 500x600.  Name this file "submission-blur-<your-gt-email-id>.png" and include it in the top level folder.
-
-### Depth of Field
-
-Depth of field is implemented by simulating a more realistic lens projection.  Our basic ray tracer shoots a ray from a single center of projection (a pinhole camera).  Real cameras have lenses with larger apertures, that collect light rays arriving at many directions, and focusing them on the image plane.  
-
-Simulating a real lens is complicated (see the book, or sources on the internet).  Here, we simulate it with the following parameters for an eye ray:
-- `lensSize` represents the size of the lens (the area that the origin of the eyeRays should be spread over)
-- `depth1` represents the distance along the eye ray that the lens sits at
-- `depth2` is the distance along the eye ray that is the focal plane.
-
-The approach you should take is as follows.  When you have a distribution for an eye ray, instead of jittering the direction of the ray through the viewplane, you will instead 
-- position a rectangle of size "viewplane pixel size * lensSize" along the eye ray at distance "depth1".
-- distributed points over that rectangle
-- use those points as the origin of your distribution rays, with their direction pointing at the point "depth2" distance along the original eye ray
-
-In this way, each pixel creates a set of rays that focus through a single focal distance.
-
-Averaging these values should generate an image with a depth of field effect, like this one captured by typing "pjgd="
-
-<img src="depth-of-field.png" width="400">
-
+Ray-traces the scene and displays the image in the canvas region in your browser.  We have provided this method, but you will need to implement two internal methods, `traceRay(ray)` and `eyeRay(i,j)`, that this method calls.
