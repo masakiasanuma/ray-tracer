@@ -10,6 +10,8 @@ This project was for CS 3451 Computer Graphics course taught by Professor Blair 
 2. run with ```npm run dev```
 3. visit ```http://localhost:3000/```
 
+NOTE: Some scene with higher sample level and jittering will take a REALLY long time to render, since the primarily purpose of this project was to learn the basics of ray tracing and it is not the most efficient implementation. For testing the features, setting sample level to 4 is enough to produce a smooth scene. 
+
 ### Scene Selection
 
 Select the scene you want to render. The last scene (Three Spheres with Disk and Area Light) is a great way to test all the features for this ray tracer.
